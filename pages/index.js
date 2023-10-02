@@ -74,10 +74,9 @@ export default function HomePage() {
         let tx = await atm.deposit(1);
         await tx.wait();
         getBalance();
-        // Display success message to the user
         alert("Deposit successful!");
       } catch (error) {
-        // Handle the error and provide a user-friendly message
+        console.error("Deposit error:", error);
         alert("Deposit failed. Please try again later.");
       }
     }
@@ -89,10 +88,9 @@ export default function HomePage() {
         let tx = await atm.withdraw(1);
         await tx.wait();
         getBalance();
-        // Display success message to the user
         alert("Withdrawal successful!");
       } catch (error) {
-        // Handle the error and provide a user-friendly message
+        console.error("Withdrawal error:", error);
         alert("Withdrawal failed. Insufficient balance or other error occurred.");
       }
     }
@@ -162,14 +160,14 @@ export default function HomePage() {
   const initUser = () => {
     // Check to see if user has Metamask
     if (!ethWallet) {
-      return <p><b>Please install MetaMask to use this ATM.</b></p>;
+      return <p>Please install MetaMask to use this ATM.</p>;
     }
 
     // Check to see if user is connected. If not, connect to their account
     if (!account) {
       return (
         <button onClick={connectAccount} style={buttonStyle}>
-          <b>Please connect your MetaMask wallet</b>
+          Please connect your MetaMask wallet
         </button>
       );
     }
